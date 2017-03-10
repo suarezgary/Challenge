@@ -33,16 +33,17 @@ class Mapper:
 
             for firstLevel in CategoriesObject:
                 self.appendChilds(firstLevel)
-                for secondLevel in firstLevel.childs:
-                    self.appendChilds(secondLevel)
-                    for thirdLevel in secondLevel.childs:
-                        self.appendChilds(secondLevel)
+                #for secondLevel in firstLevel.childs:
+                #    self.appendChilds(secondLevel)
+                    #for thirdLevel in secondLevel.childs:
+                    #    self.appendChilds(secondLevel)
 
-        print(CategoriesObject[0].childs[1].childs[2].childs[3].name)
+        print(CategoriesObject[0].childs[0].name)
+        print(CategoriesObject[0].name)
         return CategoriesObject
 
     def appendChilds(self, parent):
-        Childs = CategoriesDB.getChilds(parent.id).fetchall()
+        Childs = CategoriesDB.getChilds(parent.id, parent.level).fetchall()
         for child in Childs:
             newcategory = Category(child[0], child[1], child[2], child[3])
             parent.appedChild(newcategory)

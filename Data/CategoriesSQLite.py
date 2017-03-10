@@ -30,10 +30,11 @@ class Categories:
         rows = self.c.execute("SELECT * FROM categories")
         return rows
 
-    def getChilds(self, parent_id):
-        parameters = (parent_id, )
+    def getChilds(self, parent_id, parent_level):
+        childLevel = int(parent_level) + 1
+        parameters = (parent_id, childLevel)
 
-        rows = self.c.execute('SELECT * FROM categories WHERE parent_id=?', parameters)
+        rows = self.c.execute('SELECT * FROM categories WHERE parent_id=? AND level=?', parameters)
         return rows
 
     def getLevel(self, level):
