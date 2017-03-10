@@ -17,9 +17,13 @@ payload = '''<?xml version="1.0" encoding="utf-8"?>
   <DetailLevel>ReturnAll</DetailLevel>
 </GetCategoriesRequest>'''
 
-r = requests.post(url, data=payload, headers=headers )
+#r = requests.post(url, data=payload, headers=headers )
 
-root = ET.fromstring(r.text)
+#root = ET.fromstring(r.text)
+
+#Testing File(Request Time high)
+tree = ET.parse('GetCategories.xml')
+root = tree.getroot()
 
 CategoryArray = root.find('{urn:ebay:apis:eBLBaseComponents}CategoryArray')
 Categories = CategoryArray.findall('{urn:ebay:apis:eBLBaseComponents}Category')
@@ -27,3 +31,9 @@ Categories = CategoryArray.findall('{urn:ebay:apis:eBLBaseComponents}Category')
 for child in Categories:
   CategoryID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryID')
   print(CategoryID.text)
+  CategoryLevel = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel')
+  print(CategoryLevel.text)
+  CategoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName')
+  print(CategoryName.text)
+  CategoryParentID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID')
+  print(CategoryParentID.text)
