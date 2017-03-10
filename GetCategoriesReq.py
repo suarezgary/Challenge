@@ -1,4 +1,5 @@
 import requests
+import xml.etree.ElementTree as ET
 
 url = 'https://api.sandbox.ebay.com/ws/api.dll'
 headers = {'X-EBAY-API-CALL-NAME':'GetCategories',
@@ -18,4 +19,11 @@ payload = '''<?xml version="1.0" encoding="utf-8"?>
 
 r = requests.post(url, data=payload, headers=headers )
 
-print(r.text)
+root = ET.fromstring(r.text)
+
+CategoryArray = root.find('{urn:ebay:apis:eBLBaseComponents}CategoryArray')
+Categories = CategoryArray.findall('{urn:ebay:apis:eBLBaseComponents}Category')
+
+for child in Categories:
+  CategoryID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryID')
+  print(CategoryID.text)
