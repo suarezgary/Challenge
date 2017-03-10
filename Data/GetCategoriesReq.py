@@ -1,6 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
-from  Data.Categories import Categories
+from Data.CategoriesSQLite import Categories
 
 
 class GetCategoriesRequest():
@@ -21,11 +21,11 @@ class GetCategoriesRequest():
     </GetCategoriesRequest>'''
 
   def GetCategories(self):
-    r = requests.post(url, data=self.payload, headers=self.headers )
+    r = requests.post(self.url, data=self.payload, headers=self.headers )
     return r.text
   
   def GetCategoriesObject(self):
-    r = requests.post(url, data=self.payload, headers=self.headers )
+    r = requests.post(self.url, data=self.payload, headers=self.headers )
     root = ET.fromstring(r.text)
     CategoryArrayTag = root.find('{urn:ebay:apis:eBLBaseComponents}CategoryArray')
     CategoryArray = CategoryArrayTag.findall('{urn:ebay:apis:eBLBaseComponents}Category')
@@ -51,14 +51,6 @@ class GetCategoriesRequest():
     CategoryArrayTag = root.find('{urn:ebay:apis:eBLBaseComponents}CategoryArray')
     CategoryArray = CategoryArrayTag.findall('{urn:ebay:apis:eBLBaseComponents}Category')
 
-    CategoriesDB = Categories()
-    try:
-      CategoriesDB.createTable()
-    except:
-      print("BDD ya existente, eliminaremos la data y pasamos a agregar nueva...")
-      CategoriesDB.deleteTable()
-      CategoriesDB.createTable()
-
     rowToInsert = []
 
     for child in CategoryArray:
@@ -74,5 +66,5 @@ class GetCategoriesRequest():
       row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text))
       rowToInsert.append(row)
 
-    CategoriesDB.insertList(rowToInsert)
+    return rowToInsert
 
