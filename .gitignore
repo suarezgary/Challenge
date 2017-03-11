@@ -1,2 +1,4 @@
 *.db
 *.pyc
+generated.html
+Data\__pycache__

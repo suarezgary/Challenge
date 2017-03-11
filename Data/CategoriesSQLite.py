@@ -9,10 +9,10 @@ class Categories:
 
     def createTable(self):
         # Create table
-        c.execute('''CREATE TABLE categories
+        self.c.execute('''CREATE TABLE categories
                     (ID INTEGER, level INTEGER, name text, parent_id INTEGER)''')
 
-        conn.commit()
+        self.conn.commit()
 
     def insert(self, Id, Level, Name, ParentId):
         # Insert a row of data
@@ -22,26 +22,26 @@ class Categories:
         self.conn.commit()
 
     def insertList(self, CategoryList):
-        c.executemany("INSERT INTO categories VALUES (?,?,?,?)", CategoryList)
+        self.c.executemany("INSERT INTO categories VALUES (?,?,?,?)", CategoryList)
         # Save (commit) the changes
         self.conn.commit()
 
     def getAll(self):
         rows = self.c.execute("SELECT * FROM categories")
-        return rows
+        return rows.fetchall()
 
     def getChilds(self, parent_id, parent_level):
         childLevel = int(parent_level) + 1
         parameters = (parent_id, childLevel)
 
         rows = self.c.execute('SELECT * FROM categories WHERE parent_id=? AND level=?', parameters)
-        return rows
+        return rows.fetchall()
 
     def getLevel(self, level):
         parameters = (level, )
 
         rows = self.c.execute('SELECT * FROM categories WHERE level=?', parameters)
-        return rows
+        return rows.fetchall()
 
     def deleteTable(self):
         # Create table
