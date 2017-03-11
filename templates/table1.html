@@ -1,31 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Table Tree!</title>
+<title>Category Tree</title>
 <style>
-table td {
-    border: 1px solid #eee;
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
 }
+table td {
+    border-collapse: collapse;
+}
+
+table th {
+    font-weight: bold;
+}
+table th{
+    border-bottom: 2px solid black;
+}
+
+td, th {
+    display: table-cell;
+}
+
+tbody>tr>td{
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+} 
 .level1 td:first-child {
     padding-left: 15px;
+}
+.level1 {
+    background-color: #f2f2f2;
 }
 .level2 td:first-child {
     padding-left: 30px;
 }
+.level2 {
+    background-color: #d1d1d1;
+}
 .level3 td:first-child {
     padding-left: 45px;
+}
+.level3 {
+    background-color: #c2c2c2;
 }
 .level4 td:first-child {
     padding-left: 60px;
 }
+.level4 {
+    background-color: #b2b2b2;
+}
 .level5 td:first-child {
     padding-left: 75px;
+}
+.level5 {
+    background-color: #a2a2a2;
 }
 .level6 td:first-child {
     padding-left: 90px;
 }
+.level6 {
+    background-color: #929292;
+}
 .level7 td:first-child {
     padding-left: 105px;
+}
+.level7 {
+    background-color: #828282;
 }
 .level8 td:first-child {
     padding-left: 120px;
@@ -47,14 +91,14 @@ table td {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-</head>
+</head> 
 <body>
 
     <table id="mytable">
         <thead>
             <tr>
-                <td>Name</td>
-                <td>Best Offer Enabled</td>
+                <th>Name</td>
+                <th>Best Offer Enabled</td>
             </tr>
         </thead>
         <tbody>

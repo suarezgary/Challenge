@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Table Tree!</title>
+<style>
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+table td {
+    border-collapse: collapse;
+}
+
+table th {
+    font-weight: bold;
+}
+table th{
+    border-bottom: 2px solid black;
+}
+
+td, th {
+    display: table-cell;
+}
+
+tbody>tr>td{
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+} 
+.level1 td:first-child {
+    padding-left: 15px;
+}
+.level1 {
+    background-color: #f2f2f2;
+}
+.level2 td:first-child {
+    padding-left: 30px;
+}
+.level2 {
+    background-color: #d1d1d1;
+}
+.level3 td:first-child {
+    padding-left: 45px;
+}
+.level3 {
+    background-color: #c2c2c2;
+}
+.level4 td:first-child {
+    padding-left: 60px;
+}
+.level4 {
+    background-color: #b2b2b2;
+}
+.level5 td:first-child {
+    padding-left: 75px;
+}
+.level5 {
+    background-color: #a2a2a2;
+}
+.level6 td:first-child {
+    padding-left: 90px;
+}
+.level6 {
+    background-color: #929292;
+}
+.level7 td:first-child {
+    padding-left: 105px;
+}
+.level7 {
+    background-color: #828282;
+}
+.level8 td:first-child {
+    padding-left: 120px;
+}
+.level9 td:first-child {
+    padding-left: 135px;
+}
+
+.collapse .toggle {
+    background: url("http://mleibman.github.com/SlickGrid/images/collapse.gif");
+}
+.expand .toggle {
+    background: url("http://mleibman.github.com/SlickGrid/images/expand.gif");
+}
+.toggle {
+    height: 9px;
+    width: 9px;
+    display: inline-block;   
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head> 
+<body>
+
+    <table id="mytable">
+        <thead>
+            <tr>
+                <th>Name</td>
+                <th>Best Offer Enabled</td>
+            </tr>
+        </thead>
+        <tbody>
+            
+ <tr data-depth="3" class="collapse level3">
+                                                    <td><span class="toggle collapse"></span>Candy & Nuts</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Brachs</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Chewing Gum</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Cracker Jack</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Ferrero & Kinder</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Hershey & Reeses</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Life Savers</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>M&M's</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Planters Nuts</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Merchandise & Memorabilia</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+ <tr data-depth="4" class="collapse level4">
+                                                    <td><span class="toggle collapse"></span>Other Candy & Nuts Ads</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                
+        </tbody>
+    </table>
+
+
+<script>
+$(function() {
+    $('#mytable').on('click', '.toggle', function () {
+        //Gets all <tr>'s  of greater depth
+        //below element in the table
+        var findChildren = function (tr) {
+            var depth = tr.data('depth');
+            return tr.nextUntil($('tr').filter(function () {
+                return $(this).data('depth') <= depth;
+            }));
+        };
+
+        var el = $(this);
+        var tr = el.closest('tr'); //Get <tr> parent of toggle button
+        var children = findChildren(tr);
+
+        //Remove already collapsed nodes from children so that we don't
+        //make them visible. 
+        //(Confused? Remove this code and close Item 2, close Item 1 
+        //then open Item 1 again, then you will understand)
+        var subnodes = children.filter('.expand');
+        subnodes.each(function () {
+            var subnode = $(this);
+            var subnodeChildren = findChildren(subnode);
+            children = children.not(subnodeChildren);
+        });
+
+        //Change icon and hide/show children
+        if (tr.hasClass('collapse')) {
+            tr.removeClass('collapse').addClass('expand');
+            children.hide();
+        } else {
+            tr.removeClass('expand').addClass('collapse');
+            children.show();
+        }
+        return children;
+    });
+});
+</script>
+</body>
+</html>
