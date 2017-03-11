@@ -11,9 +11,9 @@ class plintHtml:
     def printConsole(self, msg):
         print(msg)
 
-    def createFile(self):
+    def createFile(self, name='Categories'):
         TemplateFile = self.dir_path + '\\..\\templates\\table1.html'
-        self.NewFile = self.dir_path + '\\..\\generated.html'
+        self.NewFile = self.dir_path + '\\..\\' + name + '.html'
         shutil.copyfile(TemplateFile, self.NewFile)
 
 
@@ -54,7 +54,11 @@ class plintHtml:
         #textToReplace = textToReplace + '{{table_info}}'
         with fileinput.FileInput(self.NewFile, inplace=True) as file:
             for line in file:
-                print(line.replace(textToSearch, textToReplace), end='')
+                try:
+                    print(line.replace(textToSearch, textToReplace), end='')
+                except:
+                    textToReplace = "".join([ch for ch in textToReplace if ord(ch)<= 127])
+                    print(line.replace(textToSearch, textToReplace), end='')
 
     
     def rowsInfoToReplace(self, CategoryList):
@@ -95,7 +99,9 @@ class plintHtml:
                     try:
                         print(line.replace(textToSearch, textToReplace), end='')
                     except:
-                        textToReplace = ''
+                        #Eliminar los caracteres fuera del espectro valido
+                        textToReplace = "".join([ch for ch in textToReplace if ord(ch)<= 127])
+                        print(line.replace(textToSearch, textToReplace), end='')
                         continue
                 if(conteo == 0):
                     hayDatos = False
