@@ -55,14 +55,14 @@ class GetCategoriesRequest():
 
     for child in CategoryArray:
       CategoryID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryID')
-      print('Category ID: ' + CategoryID.text)
+      #print('Category ID: ' + CategoryID.text)
       CategoryLevel = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel')
-      print('Category Level: ' + CategoryLevel.text)
+      #print('Category Level: ' + CategoryLevel.text)
       CategoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName')
-      print('Category Name: ' + CategoryName.text)
+      #print('Category Name: ' + CategoryName.text)
       CategoryParentID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID')
-      print('Category Parent ID: ' + CategoryParentID.text)
-      print(' ')
+      #print('Category Parent ID: ' + CategoryParentID.text)
+      #print(' ')
       row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text))
       rowToInsert.append(row)
 

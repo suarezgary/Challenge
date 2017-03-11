@@ -25,14 +25,9 @@ except:
 
 CategoriesDB.insertList(CategoryList)
 
-#mapper = utils.CategoriesMapper.Mapper()
 ListaCategorias = CategoriesDB.getLevel(1)
 printhtml = utils.printHTML.plintHtml()
 printhtml.createFile()
-for firstlevel in ListaCategorias:
-    childPrint(firstlevel)
-    #printhtml.addRow(firstlevel)
-    #childList = CategoriesDB.getChilds(firstlevel[0], firstlevel[1])
-    #printhtml.addRows(childList)
+printhtml.addRows(ListaCategorias)
+printhtml.searchReplaceForID()
 printhtml.finishModify()
-#object = mapper.newObject()
