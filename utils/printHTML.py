@@ -8,6 +8,9 @@ class plintHtml:
     def __init__(self):
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
 
+    def printConsole(self, msg):
+        print(msg)
+
     def createFile(self):
         TemplateFile = self.dir_path + '\\..\\templates\\table1.html'
         self.NewFile = self.dir_path + '\\..\\generated.html'
@@ -89,7 +92,11 @@ class plintHtml:
                         textToSearch = '{{' + id + '}}'
                         childList = CategoryDB.getChilds(id)
                         textToReplace = self.rowsInfoToReplace(childList)
-                    print(line.replace(textToSearch, textToReplace), end='')
+                    try:
+                        print(line.replace(textToSearch, textToReplace), end='')
+                    except:
+                        textToReplace = ''
+                        continue
                 if(conteo == 0):
                     hayDatos = False
 
