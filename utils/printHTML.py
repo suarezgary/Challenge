@@ -22,14 +22,13 @@ class plintHtml:
         textToReplace = ''
         nivel = int(Category[1]) - 1
         textToReplace = textToReplace + '''\n <tr data-depth="{{level}}" class="collapse level{{level}}">
-                                                <td><span class="toggle collapse"></span>{{id}}</td>
-                                                <td>{{name}}</td>
+                                                <td><span class="toggle collapse"></span>{{name}}</td>
                                                 <td>{{bestoffer}}</td>
                                             </tr>'''
         textToReplace = textToReplace.replace("{{level}}",str(nivel))
         textToReplace = textToReplace.replace("{{id}}",str(Category[0]))
         textToReplace = textToReplace.replace("{{name}}",str(Category[2]))
-        textToReplace = textToReplace.replace("{{bestoffer}}",'Best Offer')
+        textToReplace = textToReplace.replace("{{bestoffer}}", str(category[4]))
         textToReplace = textToReplace + '{{table_info}}'
         with fileinput.FileInput(self.NewFile, inplace=True) as file:
             for line in file:
@@ -42,15 +41,14 @@ class plintHtml:
         for category in CategoryList:
             nivel = int(category[1]) - 1
             textToReplace = textToReplace + '''\n <tr data-depth="{{level}}" class="collapse level{{level}}">
-                                                    <td><span class="toggle collapse"></span>{{id}}</td>
-                                                    <td>{{name}}</td>
+                                                    <td><span class="toggle collapse"></span>{{name}}</td>
                                                     <td>{{bestoffer}}</td>
                                                 </tr>
                                                 {{{{id}}}}'''
             textToReplace = textToReplace.replace("{{level}}",str(nivel))
             textToReplace = textToReplace.replace("{{id}}",str(category[0]))
             textToReplace = textToReplace.replace("{{name}}",str(category[2]))
-            textToReplace = textToReplace.replace("{{bestoffer}}",'Best Offer')
+            textToReplace = textToReplace.replace("{{bestoffer}}", str(category[4]))
         #textToReplace = textToReplace + '{{table_info}}'
         with fileinput.FileInput(self.NewFile, inplace=True) as file:
             for line in file:
@@ -66,15 +64,14 @@ class plintHtml:
         for category in CategoryList:
             nivel = int(category[1]) - 1
             textToReplace = textToReplace + '''\n <tr data-depth="{{level}}" class="collapse level{{level}}">
-                                                    <td><span class="toggle collapse"></span>{{id}}</td>
-                                                    <td>{{name}}</td>
+                                                    <td><span class="toggle collapse"></span>{{name}}</td>
                                                     <td>{{bestoffer}}</td>
                                                 </tr>
                                                 {{{{id}}}}'''
             textToReplace = textToReplace.replace("{{level}}",str(nivel))
             textToReplace = textToReplace.replace("{{id}}",str(category[0]))
             textToReplace = textToReplace.replace("{{name}}",str(category[2]))
-            textToReplace = textToReplace.replace("{{bestoffer}}",'Best Offer')
+            textToReplace = textToReplace.replace("{{bestoffer}}", str(category[4]))
         return textToReplace
     
     def searchReplaceForID(self):

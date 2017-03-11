@@ -36,8 +36,13 @@ class GetCategoriesRequest():
       CategoryLevel = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel')
       CategoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName')
       CategoryParentID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID')
+      BestOfferEnabled = child.find('{urn:ebay:apis:eBLBaseComponents}BestOfferEnabled')
+      try:
+        bestoffer = bool(BestOfferEnabled.text)
+      except:
+        bestoffer = False
 
-      row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text))
+      row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text), bestoffer)
       rowToInsert.append(row)
 
     #CategoriesDB.insertList(rowToInsert)
@@ -58,7 +63,14 @@ class GetCategoriesRequest():
       CategoryLevel = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel')
       CategoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName')
       CategoryParentID = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID')
-      row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text))
+      BestOfferEnabled = child.find('{urn:ebay:apis:eBLBaseComponents}BestOfferEnabled')
+
+      try:
+        bestoffer = bool(BestOfferEnabled.text)
+      except:
+        bestoffer = False
+
+      row = (int(CategoryID.text), int(CategoryLevel.text), CategoryName.text, int(CategoryParentID.text), bestoffer)
       rowToInsert.append(row)
 
     return rowToInsert

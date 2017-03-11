@@ -10,7 +10,7 @@ class Categories:
     def createTable(self):
         # Create table
         self.c.execute('''CREATE TABLE categories
-                    (ID INTEGER, level INTEGER, name text, parent_id INTEGER)''')
+                    (ID INTEGER, level INTEGER, name text, parent_id INTEGER, best_offer_enable BOOLEAN)''')
 
         self.conn.commit()
 
@@ -22,7 +22,7 @@ class Categories:
         self.conn.commit()
 
     def insertList(self, CategoryList):
-        self.c.executemany("INSERT INTO categories VALUES (?,?,?,?)", CategoryList)
+        self.c.executemany("INSERT INTO categories VALUES (?,?,?,?,?)", CategoryList)
         # Save (commit) the changes
         self.conn.commit()
 
