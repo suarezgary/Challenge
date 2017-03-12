@@ -1,3 +1,4 @@
+#Created By Gary Suarez 10/03/2017
 import requests
 import xml.etree.ElementTree as ET
 from Data.CategoriesSQLite import Categories

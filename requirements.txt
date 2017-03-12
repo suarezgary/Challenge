@@ -1,0 +1,5 @@
+#This projext need the requests library in order to make the API request easier.
+#to install requests execute the following command:
+
+pip install requests
+

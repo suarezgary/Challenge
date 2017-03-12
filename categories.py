@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#Created By Gary Suarez 10/03/2017
 import sys, getopt
 import sqlite3
 import Data.GetCategoriesReq as GetCategoriesReq
@@ -24,7 +25,7 @@ def PopulateBDD():
 
 def GenerateAll():
     ListaCategorias = CategoriesDB.getLevel(1)
-    print('Generating html File')
+    print('Generating html File, please wait this can take some time...')
     printhtml.createFile()
     printhtml.addRows(ListaCategorias)
     printhtml.searchReplaceForID()
